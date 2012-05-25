@@ -1,0 +1,421 @@
+<title>Checkout By Amazon plugin v1.0 (for Zen Cart 1.3.9e) - Installation and Configuration Guide</title>
+  <style type="text/css">
+    body, div, p, td, th {
+      font-family : helvetica,sans-serif, arial;
+      font-size : 12px;
+      color : #000000;
+    }
+
+    .aws-h1, h1{
+      font-family: verdana, arial, helvetica, sans-serif;
+      font-size: 18px;
+      font-weight: bold;
+      color: #000000;
+    }
+    .aws-h2, h2{
+      font-family: verdana, arial, helvetica, sans-serif;
+      font-size: 15px;
+      color: #c60;
+    }
+    .aws-h3, h3{
+      font-family: verdana, arial, helvetica, sans-serif;
+      font-size: 12px;
+      font-weight: bold;
+      color: #c60;
+    }
+
+    /*table ID selector styles*/
+    #aws-table {
+      border-top: 1px solid #cccccc;
+      border-left: 1px solid #cccccc;
+      width:95%;
+    }
+
+    #aws-table td{
+      font-size: 12px;
+      padding: 5px 5px 5px 5px;
+      border-bottom: 1px solid #cccccc;
+      border-right: 1px solid #cccccc;
+      vertical-align:top;
+    }
+
+    #aws-table th {
+      font-size: 12px;
+      padding: 5px 5px 5px 5px;
+      border-bottom: 1px solid #cccccc;
+      border-right: 1px solid #cccccc;
+      vertical-align:top;
+      background-color: #eeeeee;
+      color: #333333;
+      font-size: 12px;
+      font-weight: bold;
+      text-align: left;
+    }
+
+    /*code, note, and example styles*/
+    pre {
+      font-family: "Courier New", Courier, mono;
+      font-size: 12px;
+      margin-top: 5px;
+      margin-bottom: 5px;
+      color: #000066;
+      padding: 5px;
+      background-color: #eff7ff;
+      border: 1px dashed #333;
+      width:100%;
+      display:block;
+    }
+	#pre-before {
+		background-color: #edd7dd;
+	}
+	#pre-after {
+		background-color: #ddffdd;
+	}
+.style3 {color: #FF0000}
+  </style>
+</head>
+                                                  
+<body>
+<h2>About this Plug-in</h2>
+<ul>
+  <li>Checkout By Amazon Plug-in for Zen Cart 1.3.9e.</li>
+  <li>Version 1.0.</li>
+  <li>Release Date : 2010-08-09</li>
+  <li>Copyright: 2007-2010 Amazon Technologies, Inc</li>
+  </ul>
+<h2>Contents of Installation and Configuration Guide</h2>
+<ol>
+  <li><a href="#Pre-Requisites">Pre-Requisites</a></li>
+  <li><a href="#InstallOptions">Installation Options</a></li>
+  <li><a href="#Option1">Installation Option 1: Fresh Zen Cart installation</a></li>
+  <li><a href="#Option2">Installation Option 2: Existing Zen Cart installation and fresh CBA plug-in</a></li>
+  <li><a href="#SchemaChanges">Schema Changes</a></li>
+  	<li><a href="#Configuration">Configuration Options</a></li>
+  	<ul>
+    	<li><a href="#ConfigOption1">Configuration Option 1: CBA Button only on your Website - Simple Integration</a></li>
+        <li><a href="#ConfigOption2">Configuration Option 2: CBA Button  + Order Management from your Website's Admin - Standard Integration</a></li>
+        <li><a href="#ConfigOption3">Configuration Option 3: CBA Button  + Order Management  from your Website's Admin + Dynamic Shipping and Tax calculation - Advanced Integration</a></li>
+    </ul>
+  <li><a href="#ConfigDetail">Enabling and configuring Checkout by Amazon Plugin v1.0</a></li>
+  <li><a href="#Troubleshooting">FAQ and Troubleshooting</a></li>
+  <li><a href="#ImportantLinks">Important Links</a></li>
+</ol>
+<h2 id="Pre-Requisites">Pre-Requisites</h2>
+<p>To use this  plug-in, you must have pre-installed the following software and account:</p>
+<ul>
+  <li>Zen Cart 1.3.9e, 1.3.8a  (Other versions are not tested).</li>
+  <li>PHP 4.x or greater.</li>
+  <li>MySQL 4.x or greater.</li>
+  <li>Checkout by Amazon  seller account. <a href="http://is.gd/qiNg" target="_blank">Click here</a> to sign up.</li>
+</ul>
+<p><em><strong>IMPORTANT</strong></em>: If you have not gone through the Readme file, you are advised to start there. Reading this guide before going through Readme might lead to confusion.</p>
+<h2 id="InstallOptions">Installation options</h2>
+<p>Please note that  by installing Checkout by Amazon Payment Module for Zen Cart, you are  agreeing to understand and abide by the terms of the license, as written in  LICENSE.txt. You have two  options for installing the Checkout by Amazon (1.0) Payment module within Zen Cart.</p>
+<ol>
+
+  <li><strong><a href="#Option1" target="_blank">Option 1: Fresh Zen Cart installation</a></strong> - Please follow  steps given in Option 1 if you are installing Zen Cart  for the first  time *without* any other modules or add-on's</li>
+  <li><strong><a href="#Option2" target="_blank">Option 2: Existing Zen Cart installation and  fresh CBA plug-in</a></strong> - Please follow the steps given in Option 2 if you are using  Zen Cart  installation (modified according to your requirements) and installing the CBA plug-in for the first time.</li>
+</ol>
+
+
+<h2 id="Option1">Installation Option 1: Fresh Zen Cart installation</h2>
+
+<p>Once you have a  fresh installation of Zen Cart *without* any other modules or add-on's, please copy the following  files to the directories mentioned (maintaining the file structure):</p>
+<ol>
+  <li><strong>Files to be over-written</strong></li>
+<br>
+  <ol>
+  <li>modified_files/includes/templates/template_default/templates/ <em><strong>to</strong></em> ZENCART_DIR/includes/templates/template_default/templates/</li>
+  <ul>
+    <li>tpl_shopping_cart_default.php<br>
+      <br>
+    </li>
+    </ul>
+  </ol>
+  <li><strong>Files to be copied as it is</strong></li>
+  <ol>
+  <li>Copy the entire checkout_by_amazon directory in new_files to the ZENCART_DIR directory</li>
+  <ul>
+    <li>new_files/checkout_by_amazon  to ZENCART_DIR/checkout_by_amazon</li>
+  </ul>
+  <li>new_files/ to ZENCART_DIR/</li>
+  <ul>
+    <li>checkout_by_amazon.php</li>
+  </ul>
+  <li>new_files/includes/modules/pages/index to  ZENCART_DIR/includes/modules/pages/index</li>
+  <ul>
+    <li>jscript_cba.php </li>
+  </ul>
+  <li>new_files/includes/modules/pages/shopping_cart to  ZENCART_DIR/includes/modules/pages/shopping_cart</li>
+  <ul>
+    <li>jscript_cba.php </li>
+  </ul>
+  <li>new_files/includes/modules/payments/ to  ZENCART_DIR/includes/modules/payments/</li>
+  <ul>
+    <li>checkout_by_amazon.php </li>
+  </ul>
+  <li>new_files/includes/languages/english/modules/payments/  to ZENCART_DIR/includes/languages/english/modules/payments/</li>
+  <ul>
+    <li>checkout_by_amazon.php <br>
+      <br>
+    </li>
+  </ul>
+  </ol>
+</ol>
+
+<h2 id="Option2">Installation Option 2: Existing Zen Cart installation and fresh CBA plug-in</h2>
+<p>Please follow the  steps below to install the CBA plug-in for the first time, if you have an existing installation Zen Cart  which is modified according to your requirements.</p>
+
+<ol>
+  <li><strong>Backup</strong></li>
+<p>If you have customized Zen Cart according to your needs or if you have other modules installed on your Zen Cart installation, replacing files  might break your existing installation. Please follow the steps below to modify  an existing installation to support Checkout by Amazon. You will need to install few new files and  modify a few existing  Zen Cart files. Before installing the Checkout by Amazon Zen Cart Plugin, it is highly recommended to backup your existing Zen Cart  installation and database. The Checkout by Amazon Zen Cart plugin will add tables to your database when it is installed in the admin UI, to store  necessary Amazon specific information.</p>
+<li><strong>Files to be copied as is (All  files should be copied) </strong></li>
+  <ol>
+  <li>Copy the entire checkout_by_amazon directory in new_files to the ZENCART_DIR directory</li>
+  <ul>
+    <li>new_files/checkout_by_amazon  to ZENCART_DIR/checkout_by_amazon</li>
+  </ul>
+  <li>new_files/ to ZENCART_DIR/</li>
+  <ul>
+    <li>checkout_by_amazon.php</li>
+  </ul>
+  <li>new_files/includes/modules/pages/index to  ZENCART_DIR/includes/modules/pages/index</li>
+  <ul>
+    <li>jscript_cba.php </li>
+  </ul>
+  <li>new_files/includes/modules/pages/shopping_cart to  ZENCART_DIR/includes/modules/pages/shopping_cart</li>
+  <ul>
+    <li>jscript_cba.php </li>
+  </ul>
+  <li>new_files/includes/modules/payments/ to  ZENCART_DIR/includes/modules/payments/</li>
+  <ul>
+    <li>checkout_by_amazon.php </li>
+  </ul>
+  <li>new_files/includes/languages/english/modules/payments/  to ZENCART_DIR/includes/languages/english/modules/payments/</li>
+  <ul>
+    <li>checkout_by_amazon.php <br>
+      <br>
+</li>
+  </ul>
+</ol>
+<li><strong>Files to be manually edited</strong></li>
+  <p>The following file should be manually edited.</p>
+  <ol>
+  <li><b><u>Modifications to &quot;ZENCART_DIR/includes/templates/template_default/templates/tpl_shopping_cart_default.php&quot;</u></b></li>
+  <p><em><u>search for the following code line no. 153 - 157:</u></em> </p>
+  CODE BEFORE ADDITION<br>
+  <table border="0" cellspacing="1" cellpadding="3" bgcolor="#ffffff">
+    <tr>
+      <td align="left" bgcolor="#ffffff" valign="top"><pre id="pre-before">&lt;div class=&quot;buttonRow back&quot;&gt;&lt;?php echo '&lt;a href=&quot;javascript:<font color="brown">popupWindow</font>(\'' . <font color="brown">zen_href_link</font>(FILENAME_POPUP_SHIPPING_ESTIMATOR) . '\')&quot;&gt;' .
+ <font color="brown">zen_image_button</font>(BUTTON_IMAGE_SHIPPING_ESTIMATOR, BUTTON_SHIPPING_ESTIMATOR_ALT) . '&lt;/a&gt;'; ?&gt;&lt;/div&gt;
+
+&lt;?php
+    <font color="navy">}</font>
+?&gt;
+  </pre></td>
+    </tr>
+  </table>
+  CODE TO BE ADDED
+  <table border="0" cellspacing="1" cellpadding="3" bgcolor="#ffffff">
+    <tr>
+      <td align="left" bgcolor="#ffffff" valign="top"><pre>&lt;!-- ** BEGIN CHECKOUT BY AMAZON ** --&gt;
+&lt;?php  
+<font color="darkgreen">// the button template displays CBA button if cart contents &gt;0 and value &gt;0</font>
+<font color=&quot;navy&quot;><b>if</b></font> (<font color="brown">defined</font>('MODULE_PAYMENT_CHECKOUTBYAMAZON_STATUS') &amp;&amp; MODULE_PAYMENT_CHECKOUTBYAMAZON_STATUS == 'True') <font color="navy">{</font>
+
+  <font color="brown">include_once</font>(DIR_FS_CATALOG . 'checkout_by_amazon/tpl_button.php');
+<font color="navy">}</font>
+?&gt;
+&lt;!-- ** END CHECKOUT BY AMAZON ** --&gt;
+</pre></td>
+    </tr>
+  </table>
+  CODE AFTER ADDITION<table border="0" cellspacing="1" cellpadding="3" bgcolor="#ffffff">
+    <tr>
+      <td align="left" bgcolor="#ffffff" valign="top"><pre id="pre-after">&lt;div class=&quot;buttonRow back&quot;&gt;&lt;?php echo '&lt;a href=&quot;javascript:<font color="brown">popupWindow</font>(\'' . <font color="brown">zen_href_link</font>(FILENAME_POPUP_SHIPPING_ESTIMATOR) . '\')&quot;&gt;' .
+ <font color="brown">zen_image_button</font>(BUTTON_IMAGE_SHIPPING_ESTIMATOR, BUTTON_SHIPPING_ESTIMATOR_ALT) . '&lt;/a&gt;'; ?&gt;&lt;/div&gt;
+
+&lt;?php
+    <font color="navy">}</font>
+?&gt;
+&lt;!-- ** BEGIN CHECKOUT BY AMAZON ** --&gt;
+&lt;?php  
+<font color="darkgreen">// the button template displays CBA button if cart contents &gt;0 and value &gt;0</font>
+<font color=&quot;navy&quot;><b>if</b></font> (<font color="brown">defined</font>('MODULE_PAYMENT_CHECKOUTBYAMAZON_STATUS') &amp;&amp; MODULE_PAYMENT_CHECKOUTBYAMAZON_STATUS == 'True') <font color="navy">{</font>
+
+  <font color="brown">include_once</font>(DIR_FS_CATALOG . 'checkout_by_amazon/tpl_button.php');
+<font color="navy">}</font>
+?&gt;
+&lt;!-- ** END CHECKOUT BY AMAZON ** --&gt;</pre></td>
+    </tr>
+  </table>
+  <br>
+  </ol>
+</ol>
+<h2 id="SchemaChanges">Schema changes</h2>
+<p>Installing this plug-in will create three  new tables in your Zen Cart database (These tables are used  for order management.) :</p>
+<ul>
+  <li>amazon_payments</li>
+  <li>amazon_order_history</li>
+</ul>
+<h2 id="Configuration">Configuration Options</h2>
+<p>You can configure the Checkout By Amazon button based on your requirements. You have the following options which inturn indicate different levels of integration of Checkout By Amazon with your website. Please go through the options below and choose the one that is best for you.</p>
+<h3 id="ConfigOption1"> Configuration Option 1: CBA Button only on your Website - Simple Integration</h3>
+<p>With this option the following are enabled on your website </p>
+<ol>
+  <li>Checkout By Amazon as a checkout option in the &quot;shopping cart&quot; page.</li>
+</ol>
+<p>The following needs to be managed from <a href="https://sellercentral.amazon.com" target="_blank">Seller Central</a> and CANNOT be done from your website.</p>
+<ol>
+  <li><strong>Order Management:</strong> To manage your orders  (fulfillment, cancel, refund etc), logon to <a href="https://sellercentral.amazon.com" target="_blank">Seller Central</a> and go to <strong>&quot;Orders&quot; -&gt;  &quot;Manage Orders&quot;.</strong> Configuration <a href="https://sellercentral.amazon.com/gp/help/help.html/ref=cb_5072_cont_help?ie=UTF8&itemID=5072&language=en_US" target="_blank">help</a>.</li>
+  <li><strong>Shipping Settings:</strong> To manage shipping, logon to <a href="https://sellercentral.amazon.com" target="_blank">Seller Central</a> and go to <strong>&quot;Settings&quot; -&gt; &quot;Shipping Settings&quot;.</strong> Configuration <a href="https://sellercentral.amazon.com/gp/help/help.html/ref=cb_5096_cont_help?ie=UTF8&itemID=5096&language=en_US" target="_blank">help</a>. </li>
+  <li><strong>Tax Settings:</strong> To manage tax, logon to <a href="https://sellercentral.amazon.com" target="_blank">Seller Central</a> and go to <strong>&quot;Settings&quot; -&gt; &quot;Manage Taxes&quot;.</strong> Configuration <a href="https://sellercentral.amazon.com/gp/help/help.html/ref=cb_5097_cont_help?ie=UTF8&itemID=5097&language=en_US" target="_blank">help</a>.</li>
+  <li><strong>Promotion Settings:</strong> You can  also set promotion codes for orders that will be processed through Checkout By  Amazon. Configuration  <a href="https://sellercentral.amazon.com/gp/help/help.html/ref=cb_5093_cont_help?ie=UTF8&itemID=5093&language=en_US" target="_blank">help</a>.</li>
+</ol>
+<p>If you would like to go with this option, please configure the fields mentioned in the following sections</p>
+<ol>
+  <li><a href="#GeneralOptions" target="_blank">General Options</a></li>
+  <li><a href="#SigningOptions" target="_blank">Signing Options</a><br>
+    <strong>NOTE:</strong> It is  strongly encouraged to have your AWS key ready to enable signed orders.&nbsp; Unsigned orders are very vulnerable to fraud.  <br>
+    * You can setup your AWS key by navigating to  <a href="https://sellercentral.amazon.com" target="_blank">Seller Central</a> &gt; Integration  &gt; <strong>AWS Access Key</strong>.  <br>
+    * To enable signed carts merchants  should also enable &ldquo;<strong>Shopping Cart Security:</strong>&rdquo;  by navigating to  <a href="https://sellercentral.amazon.com" target="_blank">Seller Central</a> &gt; Settings &gt; <strong>Checkout Pipeline Settings</strong> 
+  </p>
+</li>
+</ol>
+<h3 id="ConfigOption2">Configuration Option 2: CBA Button  + Order Management from your Website's Admin - Standard Integration</h3>
+<p>With this option the following are enabled on your website </p>
+  <ol>
+    <li>Checkout By Amazon as a checkout option in the &quot;shopping cart&quot; page.</li>
+    <li>Order Management (Ship Order, Cancel Order, Refund Order)through your website's admin portal. <br>
+      <strong>NOTE: </strong>Orders should be managed only through your website. DO NOT use seller central for the same.</li>
+    <li>Instant Order Notifications through IOPN (Optional). <strong>You will require a *https*  endpoint to enable this</strong>. If enabled, you get the following functionality:</li><ul>
+    <li>Inventory update as soon as an order is  placed.</li>
+    <li>Update as soon as a Buyer cancels an order.</li>
+    <li>Update as soon as a Amazon cancels an order due to Late shipment or risk related reasons.</li>
+    </ul>
+  </ol>
+<p>The following needs to be managed from <a href="https://sellercentral.amazon.com" target="_blank">Seller Central</a> and CANNOT be done from your website.</p>
+  <ol><li><strong>Shipping Settings:</strong> To manage shipping, logon to <a href="https://sellercentral.amazon.com" target="_blank">Seller Central</a> and go to <strong>&quot;Settings&quot; -&gt; &quot;Shipping Settings&quot;.</strong> Configuration <a href="https://sellercentral.amazon.com/gp/help/help.html/ref=cb_5096_cont_help?ie=UTF8&itemID=5096&language=en_US" target="_blank">help</a>. </li>
+    <li><strong>Tax Settings:</strong> To manage tax, logon to <a href="https://sellercentral.amazon.com" target="_blank">Seller Central</a> and go to <strong>&quot;Settings&quot; -&gt; &quot;Manage Taxes&quot;.</strong> Configuration <a href="https://sellercentral.amazon.com/gp/help/help.html/ref=cb_5097_cont_help?ie=UTF8&itemID=5097&language=en_US" target="_blank">help</a>.</li>
+    <li><strong>Promotion Settings:</strong> You can  also set promotion codes for orders that will be processed through Checkout By  Amazon. Configuration <a href="https://sellercentral.amazon.com/gp/help/help.html/ref=cb_5093_cont_help?ie=UTF8&itemID=5093&language=en_US" target="_blank">help</a>.</li>
+    </ol>
+  <p>If you would like to go with this option, please configure the fields mentioned in the following sections</p>
+  <ol>
+    <li><a href="#GeneralOptions" target="_blank">General Options</a></li>
+  <li><a href="#SigningOptions" target="_blank">Signing Options</a><br>
+        <strong>NOTE:</strong> It is  strongly encouraged to have your AWS key ready to enable signed orders.&nbsp; Unsigned orders are very vulnerable to fraud. <br>
+      * You can setup your AWS key by navigating to <a href="https://sellercentral.amazon.com" target="_blank">Seller Central</a> &gt; Integration  &gt; <strong>AWS Access Key</strong>. <br>
+      * To enable signed carts merchants  should also enable &ldquo;<strong>Shopping Cart Security:</strong>&rdquo;  by navigating to <a href="https://sellercentral.amazon.com" target="_blank">Seller Central</a> &gt; Settings &gt; <strong>Checkout Pipeline Settings</strong>
+  </p>
+    </li>
+    <li><a href="#OrderMgmtOptions" target="_blank">Order Management Options</a><br>
+    </li>
+    <li><a href="#OrderStatusMapping" target="_blank">Order Status mapping Settings</a><br>
+    <strong>NOTE:</strong> You  can configure the <a href="#OrderStatusMapping" target="_blank">Order Status mapping Settings</a> to set different order statuses. You can either use the existing  Zen Cart statuses or create new order status for Amazon Payments orders. <strong>IMPORTANT:</strong> You have  to ensure that the tables are updated appropriately  whenever you change the order status in the Administration -&gt; Payments  -&gt; Checkout by Amazon x.x&nbsp; module is  changed. If the tables are not updated the older orders might not work as  expected.</li>
+    <li><a href="#IOPNOptions" target="_blank">IOPN Options</a> - If you need IOPN (Instant order payment notification - which notifies you immediately after the order is placed) go to Seller Central and set the Merchant URL to  ZENCART_DIR/checkout_by_amazon.php (Eg: https://abc.com/checkout_by_amazon.php) - Under <a href="https://sellercentral.amazon.com/gp/cba/seller/account/settings/user-settings-view.html/ref=cb_cbapipeset_snav_cbapipeset" target="_blank">Instant Order Processing Notification  Settings</a> <strong>IMPORTANT:</strong> IOPN requires you to have a HTTPS enabled endpoint.<br>
+      <br>
+        </li>
+</ol>
+<h3 id="ConfigOption3">Configuration Option 3: CBA Button  + Order Management  from your Website's Admin + Dynamic Shipping and Tax calculation - Advanced Integration    </h3>
+<p>With this option the following are enabled on your website </p>
+<ol>
+  <li>Checkout By Amazon as a checkout option in the &quot;shopping cart&quot; page.</li>
+  <li>Order Management (Ship Order, Cancel Order, Refund Order)through your website's admin portal. <br>
+      <strong>NOTE: </strong>Orders should be managed only through your website. DO NOT use seller central for the same.</li>
+  <li>Instant Order Notifications through IOPN (Optional). If enabled, you get the following functionality:</li>
+  <ul>
+    <li>Inventory update as soon as an order is  placed.</li>
+    <li>Update as soon as a Buyer cancels an order.</li>
+    <li>Update as soon as a Amazon cancels an order due to Late shipment or risk related reasons.</li>
+  </ul>
+  <li>Send dynamic shipping rates at an order level from different shipping  carriers like Fedex, UPS, USPS, Flat rate etc, configured on your admin UI.<br>
+    <strong>NOTE:</strong> If you send more than 24 shipping methods, the buyer can choose from a maximum of 24  shipping methods (filtered) in &ldquo;Place your Order&rdquo; page of the &rdquo;Checkout With Amazon&rdquo;  pipeline.</li>
+  <li>Dynamic tax rates can be sent at an order level based on the  delivery address of the buyer.<br>
+    <br>
+  <strong><u>IMPORTANT:</u></strong>  <strong>You will require a *https*  endpoint to enable functionalities 3, 4 and 5.</strong></li>
+</ol>
+<p>You can  also set promotion codes for orders that will be processed through Checkout By  Amazon. Configuration <a href="https://sellercentral.amazon.com/gp/help/help.html/ref=cb_5093_cont_help?ie=UTF8&itemID=5093&language=en_US" target="_blank">help</a>.</p>
+<p>If you would like to go with this option, please configure the fields mentioned in the following sections</p>
+<ol>
+  <li><a href="#GeneralOptions" target="_blank">General Options</a></li>
+  <li><a href="#SigningOptions" target="_blank">Signing Options</a><br>
+      <strong>NOTE:</strong> It is  strongly encouraged to have your AWS key ready to enable signed orders.&nbsp; Unsigned orders are very vulnerable to fraud. <br>
+    * You can setup your AWS key by navigating to <a href="https://sellercentral.amazon.com" target="_blank">Seller Central</a> &gt; Integration  &gt; <strong>AWS Access Key</strong>. <br>
+    * To enable signed carts merchants  should also enable &ldquo;<strong>Shopping Cart Security:</strong>&rdquo;  by navigating to <a href="https://sellercentral.amazon.com" target="_blank">Seller Central</a> &gt; Settings &gt; <strong>Checkout Pipeline Settings</strong>
+    </p>
+  </li>
+  <li><a href="#OrderMgmtOptions" target="_blank">Order Management Options</a><br>
+  </li>
+  <li><a href="#OrderStatusMapping" target="_blank">Order Status mapping Settings</a><br>
+      <strong>NOTE:</strong> You  can configure the <a href="#OrderStatusMapping" target="_blank">Order Status mapping Settings</a> to set different order statuses. You can either use the existing  Zen Cart statuses or create new order status for Amazon Payments orders. <strong>IMPORTANT:</strong> You have  to ensure that the tables are updated appropriately  whenever you change the order status in the Administration -&gt; Payments  -&gt; Checkout by Amazon x.x&nbsp; module is  changed. If the tables are not updated the older orders might not work as  expected.</li>
+  <li><a href="#IOPNOptions" target="_blank">IOPN Options</a> - If you need IOPN (Instant order payment notification - which notifies you immediately after the order is placed) go to Seller Central and set the Merchant URL to  ZENCART_DIR/checkout_by_amazon.php (Eg: https://abc.com/checkout_by_amazon.php) - Under <a href="https://sellercentral.amazon.com/gp/cba/seller/account/settings/user-settings-view.html/ref=cb_cbapipeset_snav_cbapipeset" target="_blank">Instant Order Processing Notification  Settings</a> <strong>IMPORTANT:</strong> IOPN requires you to have a HTTPS enabled endpoint.</li>
+  <li><a href="#CallbackOptions" target="_blank">Callback Options</a>  <strong>IMPORTANT:</strong> Callback requires you to have a HTTPS enabled endpoint.                       </li>
+</ol>
+<h2 id="ConfigDetail">Enabling and configuring Checkout by Amazon v1.0</h2>
+<h3 id="GeneralOptions">General Options</h3>
+<ol start="1" type="a">
+  <li><strong>Enable Checkout by Amazon Module:</strong> Set this to &quot;true&quot; to use Checkout  by Amazon as an option on your website.</li>
+  <li><strong>Checkout by Amazon Merchant ID:</strong> Enter your Merchant ID to enable Checkout by  Amazon on your website. You can find your Merchant ID in <a href="https://sellercentral.amazon.com" target="_blank">Seller Central</a> by  clicking Settings &gt; Checkout Pipeline Settings.</li>
+  <li><strong>Operating Environment:</strong> Select your operating environment, Sandbox (testing) or  Production (live orders).</li>
+  <li><strong>Checkout Button Size:</strong> Set the button size you want to use, either large (151 x  27 px) or medium (126 x 24 px).</li>
+  <li><strong>Button Style:</strong> Select the color of the button you want to place on your website.</li>
+  <li><strong>Sort Order Display:</strong> Select the order you want to display Amazon Payments  relative to your other payment options, from lowest value (first position) to  higher values (secondary positions).</li>
+  <li><strong>Cart Expiration Time:</strong> (Optional) Set the time interval before a customer.s cart  expires and is reset. If you do not set this value, the cart will not expire.</li>
+  <li><strong>Cancellation Return Page:</strong> The page you want to send customers to when they  cancel an order within the checkout pipeline (before they click the .Place Your  Order. button). The default setting returns your customers to the catalog index  page without clearing the shopping cart.</li>
+  <li><strong>Success Return Page:</strong> The page you want to send customers to when they  successfully complete an order within the checkout pipeline (that is, they  click the .Place Your Order. button). The default setting returns your  customers to the catalog index page in your Zen Cart store.</li>
+  <li><strong>Enable Diagnostic Logging:</strong> If set to true, enables logging for debugging. The  debugging log is located in your ZENCART_DIR/checkout_by_amazon/log/ directory, and is named  checkout_by_amazon.log. </li>
+</ol>
+<h3 id="SigningOptions">Signing Options</h3>
+<ol start="1" type="a">
+  <li><strong>Enable Order Signing:</strong> Select whether you want to accept signed orders (secure)  or unsigned (insecure). As unsigned orders are vulnerable for fraud, we recommend  you enable signed orders. <br>
+    <em>  NOTE:</em> If you enable this option, you should also enable &ldquo;<strong>Shopping Cart Security:</strong>&rdquo;  by navigating to <a href="https://sellercentral.amazon.com" target="_blank">Seller Central</a> &gt; Settings &gt; <strong>Checkout Pipeline Settings</strong>
+    </p>
+</li>
+  <li><strong>AWS Access Key ID:</strong> Enter your Seller Central AWS Access Key ID. This key,  paired with your Seller Central AWS Secret Key, is required for signed orders.  You can get your <a href="https://sellercentral.amazon.com" target="_blank">Seller Central</a> AWS Access Key in Seller Central by clicking  Integration &gt; Access Key.</li>
+  <li><strong>AWS Secret Key:</strong> Enter your Seller Central AWS Secret Access Key. This key,  paired with your Seller Central AWS Access Key ID, is required for signed  orders. Treat your secret key like a password. You can get your <a href="https://sellercentral.amazon.com" target="_blank">Seller Central</a>  AWS Secret Key by clicking Integration &gt; Access Key and  then clicking +Show under &quot;Your Secret Access Key&quot;.</li>
+</ol>
+<h3 id="OrderMgmtOptions">Order Management Options</h3>
+<ol start="1" type="a">
+  <li><strong>Enable Order Management:</strong> Enable this feature to view and manage (ship, refund,  or cancel) Checkout by Amazon orders within the Zen Cart Admin Order UI  without logging in to Seller Central. <em>NOTE:</em> Before you enable this feature, you must  enable programmatic XML feeds on seller central using the steps below:<br>
+      <ol>
+          <li>In <a href="https://sellercentral.amazon.com" target="_blank">Seller Central</a>, click <strong>Settings</strong>, and then click <strong>Checkout Pipeline Settings</strong>.</li>
+          <li>Under the Order Report Settings section, click <strong>Edit</strong>.</li>
+          <li>Set the <strong>Type</strong> of report to <strong>XML</strong>.</li>
+          <li>Set the <strong>Schedule</strong> of report to 1 hour.</li>
+          <li>Click <strong>Submit</strong>.<br>
+        </li>
+        </ol>
+  </li>
+  <li><strong>Checkout by Amazon Merchant Login ID:</strong> Enter your login ID (the e-mail address  you use to log in to your Checkout by Amazon merchant account on Seller  Central).</li>
+  <li><strong>Checkout by Amazon Merchant Password:</strong> Enter your password (the password you use  to log in to your Checkout by Amazon merchant account on Seller Central).</li>
+  <li><strong>Checkout by Amazon Merchant Token:</strong> Enter your Merchant Token. You can get your  Merchant Token in <a href="https://sellercentral.amazon.com" target="_blank">Seller Central</a> by clicking Settings &gt; Account Info and  scrolling down to the Your Merchant Token section.</li>
+  <li><strong>Checkout by Amazon Merchant Name: </strong>Enter your Merchant Business Display Name.  You can get your Merchant Business Display Name in <a href="https://sellercentral.amazon.com" target="_blank">Seller Central</a> by clicking  Settings &gt; Account Info and scrolling down to the Your Business Information  section.</li>
+</ol>
+<h3 id="CallbackOptions">Callback Options</h3>
+<ol start="1" type="a">
+  <li><strong>Enable Callbacks:</strong> You can use the Callback API to dynamically specify shipping  (using USPS, FedEx, or UPS) or taxes as calculated by your Zen Cart site when  customers are in the checkout pipeline.</li>
+  <li><strong>Callback Page:</strong> Enter the URL on your Zen Cart site where Amazon sends the  callback request for dynamic rate calculations. The URL should contain the host  and port, and should be set to the path  ZENCART_DIR/checkout_by_amazon.php. For example,  https://mydomain.com/checkout_by_amazon.php.</li>
+  <li><strong>Enable Shipping Calculations:</strong> Enable dynamic shipping rate calculations  (callbacks) from FedEx, UPS, or USPS. You can enable only one of these  carriers. For shipping rate calculations to work correctly, you must first  install and configure the FedEx, UPS, or USPS shipping module in Zen Cart.</li>
+  <li><strong>Enable Tax Calculations:</strong> Enable dynamic tax rate calculations (callbacks).  Before you enable this feature, apply the correct tax classes and tax rates to  your inventory items in Zen Cart.</li>
+  <li><strong>Is Shipping and Handling Taxed:</strong> Select to specify whether to apply the tax rate  to the shipping costs as part of the callback.</li>
+</ol>
+<h3 id="OrderStatusMapping">Mapping Order Status Options</h3>
+<ol start="1" type="a">
+  <li><strong>New order Status: </strong>What       should be the order status when Amazon is processing the order? This state       will indicate that the order is not yet authorized</li>
+  <li><strong>Ready to Ship order       Status: </strong>What should be the order status after Amazon processes it?       This state will indicate that the order is pending shipment from your end</li>
+  <li><strong>Deliver order Status: </strong>What       should be the order status after you deliver it? The order will move into       this state when you click the &ldquo;Confirm Shipment&rdquo; option</li>
+  <li><strong>Cancel order Status: </strong>What       should be the order status when the order gets canceled? The order will       move into this state when you click the &ldquo;Cancel order&rdquo; button</li>
+  <li><strong>Refund Order Status: </strong>What       should be the order status after you apply a refund on it? The order will       move into this state when you click the &ldquo;Refund Order&rdquo; button</li>
+</ol>
+<h2 id="Troubleshooting">Troubleshooting and debugging</h2>
+<p>Please check the FAQ and Troubleshooting guide. Click <a href="FAQ_Troubleshooting_Guide.html" target="_blank">here</a>.</p>
+<h2 id="ImportantLinks">Important Links</h2>
+<ol><li>Know more about Checkout By Amazon. Click <a href="https://payments.amazon.com/sdui/sdui/business?sn=cba/o&apaysccid=CBA_OSCMS2" target="_blank">here</a>. </li>
+  <li><a href="https://sellercentral.amazon.com/gp/help/" target="_blank">Checkout by Amazon Documentation</a> &amp; Seller  Central</li>
+  <li><a href="http://www.amazon.com/webservices" target="_blank">Amazon Web Services</a></li>
+  <li><a href="http://www.amazonsellercommunity.com/forums/category.jspa?categoryID=7" target="_blank">Amazon Seller Community Website</a>. Please use this for integration related queries.</li>
+  <li><a href="https://sellercentral.amazon.com/gp/help/200144670" target="_blank">Fulfillment by Amazon</a></li>
+</ol>
+</body>
+</html>
+

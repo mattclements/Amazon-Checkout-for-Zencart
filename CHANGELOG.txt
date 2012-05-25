@@ -1,0 +1,13 @@
+﻿CHANGE LOG
+-------------
+08/09/2010 v1.0 GA Release  (Amazon Payments team)
+	- Integrated with Instant Order Payment Notifications
+	- Dynamic Shipping and Tax Rates calculation using Callbacks.
+	- Amazon PayPhrase checkout integration tested
+	- Orders placed through Checkout By Amazon can be synched from Amazon through Merchant Feeds and managed within Zen Cart
+	- Amazon order status history - Reflects the statuses an order went through on Amazon and corresponding Zen Cart statuses.
+	- Has been tested to run with PHP4.4 and above.
+	- Checkout with Amazon button on the Shopping Cart page
+	- Amazon 1-Click and Express Checkout integration
+	- Signed / Unsigned Carts
+	- Ability to add custom data required by merchants via custom data modules

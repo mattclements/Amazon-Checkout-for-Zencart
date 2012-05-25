@@ -1,0 +1,258 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+
+  <title>Checkout By Amazon plugin v1.0 (for Zen Cart 1.3.9e) - Custom Data Guide</title>
+  <style type="text/css">
+    body, div, p, td, th {
+      font-family : helvetica,sans-serif, arial;
+      font-size : 12px;
+      color : #000000;
+    }
+
+    .aws-h1, h1{
+      font-family: verdana, arial, helvetica, sans-serif;
+      font-size: 18px;
+      font-weight: bold;
+      color: #000000;
+    }
+    .aws-h2, h2{
+      font-family: verdana, arial, helvetica, sans-serif;
+      font-size: 15px;
+      color: #c60;
+    }
+    .aws-h3, h3{
+      font-family: verdana, arial, helvetica, sans-serif;
+      font-size: 12px;
+      font-weight: bold;
+      color: #c60;
+    }
+
+    /*table ID selector styles*/
+    #aws-table {
+      border-top: 1px solid #cccccc;
+      border-left: 1px solid #cccccc;
+      width:95%;
+    }
+
+    #aws-table td{
+      font-size: 12px;
+      padding: 5px 5px 5px 5px;
+      border-bottom: 1px solid #cccccc;
+      border-right: 1px solid #cccccc;
+      vertical-align:top;
+    }
+
+    #aws-table th {
+      font-size: 12px;
+      padding: 5px 5px 5px 5px;
+      border-bottom: 1px solid #cccccc;
+      border-right: 1px solid #cccccc;
+      vertical-align:top;
+      background-color: #eeeeee;
+      color: #333333;
+      font-size: 12px;
+      font-weight: bold;
+      text-align: left;
+    }
+
+    /*code, note, and example styles*/
+    pre {
+      font-family: "Courier New", Courier, mono;
+      font-size: 12px;
+      margin-top: 5px;
+      margin-bottom: 5px;
+      color: #000066;
+      padding: 5px;
+      background-color: #eff7ff;
+      border: 1px dashed #333;
+      width:100%;
+      display:block;
+    }
+  .style1 {color: #FF0000}
+  </style>
+</head>
+<body>
+
+<h2>About this Plug-in</h2>
+<ul>
+  <li>Checkout By Amazon Plug-in for Zen Cart 1.3.9e.</li>
+  <li>Version 1.0.</li>
+  <li>Release Date : 2010-08-09</li>
+  <li>Copyright: 2007-2010 Amazon Technologies, Inc</li>
+</ul>
+<h2>Contents of Inserting Custom Data</h2>
+<ol>
+  <li><a href="#Introduction">Introduction</a></li>
+  <li><a href="#Code">How To Insert My Own Custom Data into CBA Order XML</a></li>
+  <li><a href="#ImportantLinks">Important Links</a></li>
+</ol>
+<h2 id="Introduction">Introduction</h2>
+<p>Using Custom Data, you can send your own data definitions and data fields in the order XML feeds. Depending on your needs, you can modify the Order XML feed you send us. The response feeds we send to you (the Callback Request XML and the Instant Order Processing Notification XML) are modified as well to include the Custom Data you had sent in the original order XML. You can use this data while processing/managing the order and/or for reporting/metrics generation purposes.</p>
+Custom data can be sent at <br/>
+<ol>
+  <li>The <strong>order level </strong>Eg: Customer IP address, Customer session details etc </li>
+  <li>The <strong>order item (product) level</strong> Eg: Product specific attributes like color, size etc.<br />  
+</li>
+</ol>
+  In order to enable you to include Custom Data for CBA orders placed through your website, we have written pluggable modules. Please continue reading to know how to do this.<br/>
+
+<h2 id="Code">How To Insert My Own Custom Data into CBA Order XML</h2>
+<p>You can insert your own Custom XML into the CBA order XML by writing a simple custom data module. In this section we will walk you through the procedure to write a sample module and show the output it generates. </p>
+<p>Custom data modules for CBA are located under <em>checkout_by_amazon/modules/custom_data/ </em>directory. This directory contains two sub-directories namely 'cart' and 'item'</p>
+<ul>
+  <li> 'cart' folder contains modules which are included in the &lt;CartCustomData&gt; XML (Order Level Custom Data)</li>
+  <li>'item' folder contains modules which are included in the &lt;ItemCustomData&gt; XML (Product/Item Level Custom Data)</li>
+</ul>
+<h3> Writing CartCustomData module (To insert Custom XML at an order level):</h3>
+
+<p> This section shows you how to write a module that inserts Custom Data at an order level. Please ensure that you follow the conditions below while writing a module to send cart level custom data</p>
+<ol>
+  <li>The module should be located under the directory <em>checkout_by_amazon/modules/custom_data/cart</em>.</li>
+  <li>The class name for every module should be same as that of the filename.</li>
+  <li>This class should contain a method / function called &quot;custom_data&quot;.</li>
+  <li>Please include the data which are not item centric. For e.g. customer ip address</li>
+    Note: In the Cart Custom Data module, you can access all variables from osCommerce via the 'global' keyword.<br />
+</ol>
+  <b>Sample CartCustomData module - MerchantData.php</b> (to send details about customer ip address and Serialized session cart in order XML) <br>
+<table border="0" cellspacing="1" cellpadding="3" bgcolor="#ffffff"><tr><td align="left" bgcolor="#ffffff" valign="top"><pre><font color=&quot;navy&quot;><b>class</b></font> MerchantData <font color="navy">{</font>
+ <font color="darkgreen">  /* 
+    * @brief constrcutor
+    */</font>
+   function <font color="brown">MerchantData</font>() <font color="navy">{</font>
+   <font color="navy">}</font>
+&nbsp;
+   <font color="darkgreen">/* 
+    * @brief custom data is called in button generator 
+    * @return associative array 
+    */</font>&nbsp;
+   function <font color="brown">custom_data</font>() <font color="navy">{</font>                   
+     $test_array = <font color="brown">array</font>(&quot;customer_ip_address&quot; =&gt; $_SERVER['REMOTE_ADDR'], &quot;cart_id&quot; =&gt; <font color="brown"></font>$_SESSION['cartID']);
+     <font color=&quot;navy&quot;><b>return</b></font> $test_array;
+   <font color="navy">}</font>
+<font color="navy">}</font>
+</pre></td></tr></table>
+                      <strong>Sample Order XML generated with customer IP Address and Serialized cart from session ($_SESSION['Cart'])</strong><br>
+<table border="0" cellspacing="1" cellpadding="3" bgcolor="#ffffff"><tr><td align="left" bgcolor="#ffffff" valign="top"><pre>......
+    &lt;/Item&gt;
+ &lt;/Items&gt;
+ &lt;CartCustomData&gt;
+    &lt;MerchantData&gt;
+       &lt;Customer_ip_address&gt;<font color="red">10</font>.<font color="red">0</font>.<font color="red">76</font>.<font color="red">54</font>&lt;/Customer_ip_address&gt;&nbsp;
+       &lt;Cart_id&gt;<font color="red">87091</font>&lt;/Cart_id&gt;
+    &lt;/MerchantData&gt;
+ &lt;/CartCustomData&gt;
+&lt;/Cart&gt;
+......
+</pre></td></tr></table>
+  <strong>Sample Callback XML received with the customer IP  Address and Serialized cart which are sent in Order XML.</strong><br>
+<table border="0" cellspacing="1" cellpadding="3" bgcolor="#ffffff"><tr><td align="left" bgcolor="#ffffff" valign="top"><pre>......
+  &lt;/Item&gt;&lt;/CallbackOrderCartItem&gt;&lt;/CallbackOrderCartItems&gt;
+  &lt;CartCustomData&gt;
+     &lt;MerchantData&gt;
+        &lt;Customer_ip_address&gt;<font color="red">10</font>.<font color="red">0</font>.<font color="red">76</font>.<font color="red">54</font>&lt;/Customer_ip_address&gt;
+        &lt;Cart_id&gt;<font color="red">87091</font>&lt;/Cart_id&gt;
+     &lt;/MerchantData&gt;
+  &lt;/CartCustomData&gt;&lt;/CallbackOrderCart&gt;
+......
+</pre></td></tr></table>
+
+  <strong>Sample IOPN XML received with the customer IP  Address and Serialized cart which are sent in IOPN XML.</strong><br>
+<table border="0" cellspacing="1" cellpadding="3" bgcolor="#ffffff"><tr><td align="left" bgcolor="#ffffff" valign="top"><pre>......
+        &lt;/Charge&gt;
+    &lt;/Component&gt;
+
+ &lt;/ItemCharges&gt;
+ &lt;CartCustomData&gt;
+     &lt;MerchantData&gt;
+        &lt;Customer_ip_address&gt;<font color="red">10</font>.<font color="red">0</font>.<font color="red">76</font>.<font color="red">54</font>&lt;/Customer_ip_address&gt;
+        &lt;Cart_id&gt;<font color="red">87091</font>&lt;/Cart_id&gt;
+     &lt;/MerchantData&gt;
+ &lt;/CartCustomData&gt;
+&lt;/ProcessedOrderItem&gt;
+......
+</pre></td></tr></table>
+
+<h3>Writing ItemCustomData module (To insert Custom XML at an item level):</h3>
+<p> This section shows you how to write a module that inserts Custom Data at an item level in the order. Please ensure that you follow the conditions below while writing a module to send item level custom data</p>
+<ol>
+  <li>The module should be located under the directory <em>checkout_by_amazon/modules/custom_data/item</em>.</li>
+  <li>The class name for every module should be same as that of the filename.</li>
+  <li>This class should contain a method / function called &quot;custom_data&quot; with $item as the argument.</li>
+  <li>Please include the data which are not item centric. For e.g. simple Product attributes such as Model, Manufacturer etc</li>
+  Note: In the Item Custom Data module, you can access all variables from osCommerce via the 'global' keyword.
+</ol>
+<b>Sample ItemCustomData module - ProductInfo.php</b> (to send details about Product Attributes such as Model, Manufacturer in order XML)<br>
+<table border="0" cellspacing="1" cellpadding="3" bgcolor="#ffffff"><tr><td align="left" bgcolor="#ffffff" valign="top"><pre><font color=&quot;navy&quot;><b>class</b></font> ProductInfo <font color="navy">{</font>
+   <font color="darkgreen">/* 
+    * @brief constrcutor
+    */</font>
+   function <font color="brown">ProductInfo</font>() <font color="navy">{</font>                   
+   <font color="navy">}</font>
+&nbsp;
+   <font color="darkgreen">/* 
+    * @brief custom data is called in button generator 
+    * @param item -  item associative array passed from button generator
+    * @return associative array 
+    */</font>
+   function <font color="brown">custom_data</font>($item) <font color="navy">{</font>
+       $custom_data = <font color="brown">array</font>();
+       $custom_data[&quot;model&quot;] = $item[model];
+       $custom_data[&quot;manufacturer&quot;] = <font color="brown">zen_get_products_manufacturers_name</font>((<font color=&quot;navy&quot;><b>int</b></font>)$item[id]);
+       <font color=&quot;navy&quot;><b>return</b></font> $custom_data;
+    <font color="navy">}</font>
+<font color="navy">}</font>
+</pre></td></tr></table>
+<strong>Sample Order XML generated with Product Attributes such as Model, Manufacturer.</strong><br>
+<table border="0" cellspacing="1" cellpadding="3" bgcolor="#999999"><tr><td align="left" bgcolor="#ffffff" valign="top"><pre>......
+  &lt;FulfillmentNetwork&gt;MERCHANT&lt;/FulfillmentNetwork&gt;
+  &lt;ItemCustomData&gt;
+    &lt;ProductInfo&gt;
+      &lt;Model&gt;<span class="style1">DVD-UNSG</span>&lt;/Model&gt;
+      &lt;Manufacturer&gt;<span class="style1">Warner</span>&lt;/Manufacturer&gt;
+    &lt;/ProductInfo&gt;
+  &lt;/ItemCustomData&gt;
+&lt;/Item&gt;
+......
+</pre></td></tr></table>
+<strong>Sample Callback XML received with Product Attributes such as Model, Manufacturer which are sent in Order XML.</strong><br>
+<table border="0" cellspacing="1" cellpadding="3" bgcolor="#999999"><tr><td align="left" bgcolor="#ffffff" valign="top"><pre>......
+  &lt;FulfillmentNetwork&gt;MERCHANT&lt;/FulfillmentNetwork&gt;
+  &lt;ItemCustomData&gt;
+    &lt;ProductInfo&gt;
+      &lt;Model&gt;<span class="style1">DVD-UNSG</span>&lt;/Model&gt;
+      &lt;Manufacturer&gt;<span class="style1">Warner</span>&lt;/Manufacturer&gt;
+    &lt;/ProductInfo&gt;
+
+  &lt;/ItemCustomData&gt;
+&lt;/Item&gt;
+......
+</pre></td></tr></table>
+<strong>Sample IOPN XML received with Product Attributes such as Model, Manufacturer which are sent in Order XML.</strong><br>
+<table border="0" cellspacing="1" cellpadding="3" bgcolor="#999999"><tr><td align="left" bgcolor="#ffffff" valign="top"><pre>......
+          &lt;/Charge&gt;
+       &lt;/Component&gt;
+    &lt;/ItemCharges&gt;
+
+    &lt;ItemCustomData&gt;
+       &lt;ProductInfo&gt;
+          &lt;Model&gt;<span class="style1">DVD-UNSG</span>&lt;/Model&gt;
+          &lt;Manufacturer&gt;<span class="style1">Warner</span>&lt;/Manufacturer&gt;
+       &lt;/ProductInfo&gt;
+
+    &lt;/ItemCustomData&gt;
+&lt;/ProcessedOrderItem&gt;
+......
+</pre></td></tr></table>
+<br>
+<h2 id="ImportantLinks">Important Links</h2>
+<ol>
+  <li>Using Custom Data Fields: <a href="https://payments.amazon.com/sdui/sdui/about?nodeId=76330">HTML Guide</a> | <a href="http://amazonpayments.s3.amazonaws.com/documents/Using_Custom_Data_Fields.pdf">PDF</a></li>
+  <li>Know more about Checkout By Amazon. Click <a href="https://payments.amazon.com/sdui/sdui/business?sn=cba/o&amp;apaysccid=CBA_OSCMS2" target="_blank">here</a>. </li>
+  <li><a href="https://sellercentral.amazon.com/gp/help/" target="_blank">Checkout by Amazon Documentation</a> &amp; Seller  Central</li>
+  <li><a href="http://www.amazon.com/webservices" target="_blank">Amazon Web Services</a></li>
+  <li><a href="http://www.amazonsellercommunity.com/forums/category.jspa?categoryID=7" target="_blank">Amazon Seller Community Website</a>. Please use this for integration related queries.</li>
+</ol>
+<h2>&nbsp;</h2>
+</body>
+</html>

@@ -1,0 +1,69 @@
+﻿INSTALLATION INSTRUCTIONS FOR CHECKOUT BY AMAZON MODULE FOR ZEN CART
+Author: Balachandar Muruganantham
+Copyright: 2007-2010 Amazon Technologies, Inc
+-----------------------------------------------                                                                                    
+
+INSTALLATION OPTIONS
+------------------------
+        Please note that by installing Checkout by Amazon Payment Module for Zen Cart, you agree, understand, and will abide by the terms of the License, as written in LICENSE.txt.
+        You have two options for installing the Checkout by Amazon Payment module within Zen Cart.  If you have a fresh installation, please follow the directions in "FRESH INSTALL" below.  If you already have an existing copy of Zen Cart, please follow the directions in the section marked "EXISTING INSTALL".
+        Please note, if you already have Google Checkout installed in your existing copy of Zen Cart, the last step of the EXISTING INSTALLATION is different, please read the directions carefully.  
+
+	NOTE:This is the first release for Checkout By Amazon Plugin v1.0 for Zen Cart and can be used in a production environment. We highly recommend the installation of this release by store owners who will be performing it themselves.
+
+FRESH INSTALL
+---------------
+
+	- copy the files from new_files directory to your ZENCART_DIR/
+	- copy the file modified_files/includes/templates/template_default/templates/tpl_shopping_cart_default.php to ZENCART_DIR/includes/templates/template_default/templates/tpl_shopping_cart_default.php. This will overwrite the existing file
+	- Now go to your Zen Cart Administration > Modules > Payment and select Checkout by Amazon x.x and click on the install button to install the configuration settings. 
+	- Click on edit button and give all the details like Merchant Id, and enable order signing with AWS Access ID, AWS Secret Key (if you want your cart to be secure signed)
+	- You are done. Try adding a product to the shopping cart and you should see the Checkout with Amazon button on the shopping cart page.
+
+
+EXISTING INSTALL
+------------------
+  To integrate an existing Zen Cart with Checkout by Amazon, you will need to copy over new files, and modify some existing files within Zen Cart.
+	- copy the files from new_files directory to your ZENCART_DIR/
+	- You need to modify the shopping cart template file. see below "Modifying tpl_shopping_cart_default.php" for instruction
+	- Now go to your Zen Cart Administration > Modules > Payment and select Checkout by Amazon x.x and click on the install button to install the configuration settings. 
+	- Click on edit button and give all the details like Merchant Id, and enable order signing with AWS Access ID, AWS Secret Key (if you want your cart to be secure signed)
+	- You are done. Try adding a product to the shopping cart and you should see the Checkout with Amazon button on the shopping cart page.
+
+INSTANT ORDER NOTIFICATION
+-------------------------------
+  See README > SETUP ON ADMIN UI > 6. IOPN Setup
+
+Modifying tpl_shopping_cart_default.php
+---------------------------------------
+search for the following code line no. 153 - 157
+
+<div class="buttonRow back"><?php echo '<a href="javascript:popupWindow(\'' . zen_href_link(FILENAME_POPUP_SHIPPING_ESTIMATOR) . '\')">' .
+ zen_image_button(BUTTON_IMAGE_SHIPPING_ESTIMATOR, BUTTON_SHIPPING_ESTIMATOR_ALT) . '</a>'; ?></div>
+<?php
+    }
+?>
+
+add the following Code after the above lines i.e line no 158:
+
+<!-- ** BEGIN CHECKOUT BY AMAZON ** -->
+<?php  // the button template displays CBA button if cart contents >0 and value >0
+if (defined('MODULE_PAYMENT_CHECKOUTBYAMAZON_STATUS') && MODULE_PAYMENT_CHECKOUTBYAMAZON_STATUS == 'True') {
+  include_once(DIR_FS_CATALOG . 'checkout_by_amazon/tpl_button.php');
+}
+?>
+<!-- ** END CHECKOUT BY AMAZON ** -->
+
+Note: Line no may not be exactly the same as mentioned here. Please take extra care when adding the code. Always take backup of your files.
+
+CONFIGURING CRON JOB
+------------------------
+Please configure or ask your hosting provider to configure a cron job that can run once in 5 minutes. This cron job ensures that the orders and order statuses are synched up with Amazon on a regular basis. Please refer example below for a sample cron job configuration.
+
+IMPORTANT: If you want to manage orders placed through Checkout By Amazon on your website, setting up the cron job is mandatory.
+
+*/5 * * * * wget "http://mystore/checkout_by_amazon.php?action=Everything" -O /dev/null
+
+This cron is required to keep your orders in sync with Amazon Seller Central Order system. 
+
+Note: Some Hosting provider will not allow you to set cron run once in 5 minutes. In such case, please contact hosting provider for appropriate configurations.

@@ -1,0 +1,357 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+
+  <title>Checkout By Amazon plugin v1.0 (for ZenCart 1.3.9e) - FAQ and Troubleshooting Guide</title>
+  <style type="text/css">
+    body, div, p, td, th {
+      font-family : helvetica,sans-serif, arial;
+      font-size : 12px;
+      color : #000000;
+    }
+
+    .aws-h1, h1{
+      font-family: verdana, arial, helvetica, sans-serif;
+      font-size: 18px;
+      font-weight: bold;
+      color: #000000;
+    }
+    .aws-h2, h2{
+      font-family: verdana, arial, helvetica, sans-serif;
+      font-size: 15px;
+      color: #c60;
+    }
+    .aws-h3, h3{
+      font-family: verdana, arial, helvetica, sans-serif;
+      font-size: 12px;
+      font-weight: bold;
+      color: #c60;
+    }
+
+    /*table ID selector styles*/
+    #aws-table {
+      border-top: 1px solid #cccccc;
+      border-left: 1px solid #cccccc;
+      width:95%;
+    }
+
+    #aws-table td{
+      font-size: 12px;
+      padding: 5px 5px 5px 5px;
+      border-bottom: 1px solid #cccccc;
+      border-right: 1px solid #cccccc;
+      vertical-align:top;
+    }
+
+    #aws-table th {
+      font-size: 12px;
+      padding: 5px 5px 5px 5px;
+      border-bottom: 1px solid #cccccc;
+      border-right: 1px solid #cccccc;
+      vertical-align:top;
+      background-color: #eeeeee;
+      color: #333333;
+      font-size: 12px;
+      font-weight: bold;
+      text-align: left;
+    }
+
+    /*code, note, and example styles*/
+    pre {
+      font-family: "Courier New", Courier, mono;
+      font-size: 12px;
+      margin-top: 5px;
+      margin-bottom: 5px;
+      color: #000066;
+      padding: 5px;
+      background-color: #eff7ff;
+      border: 1px dashed #333;
+      width:100%;
+      display:block;
+    }
+  .style1 {font-style: italic}
+  .style2 {font-style: italic}
+  </style>
+</head>
+<body>
+
+<h2>About this Plug-in</h2>
+<ul>
+  <li>Checkout By Amazon Plug-in for Zen Cart 1.3.9e.</li>
+  <li>Version 1.0.</li>
+  <li>Release Date : 2010-08-09</li>
+  <li>Copyright: 2007-2010 Amazon Technologies, Inc</li>
+</ul>
+<h2>Contents of FAQ and Troubleshooting Guide</h2>
+<ol>
+  <li><a href="#Compatibility">Compatibility related queries</a></li>
+  <li><a href="#NewInstallation">New installation related queries</a></li>
+  <li><a href="#CBAButton">CBA Button Related Queries</a></li>
+  <li><a href="#OrderNoIOPN">Order Management related queries  (without IOPN)</a></li>
+  <li><a href="#OrderWithIOPN">Order Management related queries  (using IOPN)</a></li>
+  <li><a href="#NoCallback">Static Shipping and Tax related  queries (without Callback)</a></li>
+  <li><a href="#UsingCallback">Dynamic Shipping and Tax related  queries (using callback)</a></li>
+  <li><a href="#Promotions">Promotions related queries</a></li>
+  <li><a href="#Logging">Logging and Debugging</a></li>
+</ol>
+
+<h2 id="Compatibility">Compatibility related queries<br />
+</h2>
+<ol><li> <strong>What are the  ZenCart versions supported for the CBA 1.0 plug-in?</strong><br />  
+As of now only 1.3.8a and 1.3.9e versions are supported.<br />
+  <br />
+  </li>
+  <li> <strong>What are the PHP versions supported?</strong><br /> 
+ZenCart compatible PHP 4.x or greater. Please refer the <a href="Installation_Config_Guide.html#Pre-Requisites" target="_blank">Installation Guide - Pre-Requisites Section</a> for more details.<br />
+  <br />
+  </li>
+  <li> <strong>What are the Mysql  versions supported?</strong><br />
+ZenCart compatible Mysql 4.x or greater. Please refer the <a href="Installation_Config_Guide.html#Pre-Requisites" target="_blank">Installation Guide - Pre-Requisites Section</a> for more details.<br />
+  <br />
+  </li>
+  <li> <strong>What are the  <strong> compatible contributions?</strong></strong><br />
+We have *not* tested out plug-in with contributions available on Zencart site.<br />
+  <br />
+  </li>
+  <li><strong> Which  hosting providers are compatible with the plug-in?</strong><br />
+  In general it would be compatible with most of the hosting providers that have the supported PHP, MySql and ZenCart versions. The plug-in has been tested specifically on Siteground and GoDaddy.  <br />
+  <em><strong> Note:</strong></em> Please ensure you turn on all necessary php configuration that Zencart requires.<br />
+  <br />
+  </li>
+</ol>
+  
+<h2 id="NewInstallation">New installation related queries</h2>
+
+<ol>
+  <li><strong>Do I need to do any sanity testing  after Installation?</strong><br>
+  Yes. Please do the following
+  <ol type="i">
+    <li>Place a dummy Sandbox order and complete the pipeline. Before placing the Sandbox order, please go to Administration->Modules->Payment->Checkout by Amazon x.x and set the <span class="style1"><strong>Operating Environment</strong> to <strong>Sandbox</strong>.</span></li>
+    <li>If Step i. succeeds , place an order on the live system. Before placing the live order, please go to Administration->Modules->Payment->Checkout by Amazon x.x and set the <span class="style2"><strong>Operating Environment</strong> to <strong>Production</strong></span></li>
+    <li>Check Administration -&gt; Customers -&gt; Orders page for the order placed. The order should be displayed in the  Administration -&gt; Customers -&gt; Orders page within 30 minutes of the order being placed. You can also check the order details in <a href="https://sellercentral.amazon.com/gp/orders-v2/list/ref=cb_myo_dnav_cbapipeset?ie=UTF8&useSavedSearch=default">Seller Central - Manage Orders</a><br />
+      <br />
+    </li>
+  </ol></li>
+  <li><strong>Why are my orders failing in the live system? </strong><br />
+  Please verify the following
+  <ol type="i">
+    <li>Access Key and Secret key are populated correctly here: &quot; Administration-&gt;Modules-&gt;Payment-&gt;Checkout by Amazon x.x&quot;. You can verify the access key and secret key at <a href="https://sellercentral.amazon.com/gp/cba/seller/accesskey/showAccessKey.html/ref=cb_accesskey_dnav_myo">Seller Central - 	Access Key </a></li>
+    <li> If Callback is enabled , the merchant endpoint should be https (If operating  environment is Production). To set the callback endpoint go to Administration->Modules->Payment->Checkout by Amazon x.x <strong>"CALLBACK OPTIONS"</strong> and enter the URL in <strong>"Callback Page"</strong></li>
+    <li> Look at the log file <strong>checkout_by_amazon_callback.log</strong> in the checkout_by_amazon/log directory. Information on how to debug logs can be found at <a href="FAQ_Troubleshooting_Guide.html#Logging">Logging and Debugging</a><br />
+      <br />
+    </li>
+  </ol></li>
+  <li><strong>Which shipping carriers are supported for  Checkout by Amazon x.x?</strong><br />  
+All the shipping modules which are installed in  Administration-&gt;Modules-&gt;Shipping will be used for sending quotes when the order is being placed by your customers.<br />
+  <br />
+  </li>
+  <li> <strong>Will the quotes from all the shipping carriers  be displayed for the buyer?</strong><br />  
+A maximum of 24 shipping methods will be displayed for the buyer. Amazon Payments  will shortlist a maximum of 24 to be displayed.<br />
+  <br />
+  </li>
+  <li><strong>Why is the buyer not seeing quotes other than  Standard, Expedited, TwoDay and Oneday when so many shipping modules are  installed?</strong><br />
+Please check if callback is enabled. The quotes are displayed to the buyer only  if &quot;Enable Callbacks&quot; is set to True in &quot;CALLBACK OPTIONS&quot;  of   Administration-&gt;Modules-&gt;Payment-&gt;Checkout by Amazon x.x <br />
+</li>
+</ol>  
+
+<h2 id="CBAButton">CBA Button Related Queries</h2>
+<ol>
+  <li> <strong>CBA button does not show up on the  login and checkout page. What do I do?<br />
+  </strong>Please check if you have enabled  &quot;Checkout By Amazon&quot; in  Administration-&gt;Modules-&gt;Payment-&gt;Checkout by Amazon x.x . Set <strong>Enable Checkout by Amazon</strong> to &quot;True&quot;<br />
+    <br />
+  </li>
+  <li><strong>CBA button displays a sandbox  warning below it. How can I fix this?</strong><br />
+   Go to  Administration-&gt;Modules-&gt;Payment-&gt;Checkout by Amazon x.x  and set Operating environment to &quot;Production&quot; instead of  &quot;Sandbox&quot;<br />
+    <br />
+  </li>
+  <li><strong>When I click on the CBA button, I  get a signature error. What do I do?</strong><br />
+  Re-verify your settings from seller  central for access key and secret key.The Access key and Secret key in  &quot;SIGNING OPTIONS&quot; section of&nbsp;  Administration-&gt;Modules-&gt;Payment-&gt;Checkout  By Amazon x.x should be populated with values from seller  central. <a href="https://sellercentral.amazon.com/gp/cba/seller/accesskey/showAccessKey.html/ref=cb_accesskey_dnav_cbapipeset"  target="blank">Click here to re-verify </a><br />
+    <br />
+  </li>
+  <li><strong>I ensured that I provided the right  access key and secret key. Still my button throws signature error. Why?</strong><br />
+  Go to  <a href = "https://sellercentral.amazon.com/gp/cba/seller/account/settings/user-settings-view.html/ref=cb_cbapipeset_dnav_home " target="blank">Seller Central - Checkout Pipeline Settings</a> and ensure that &quot;Shopping Cart Security:&quot;  is enabled. <br />
+    <br />
+  </li>
+  <li><strong>How can I change the size and color  of my CBA button?</strong><br /> 
+  Go to  Administration-&gt;Modules-&gt;Payment-&gt;Checkout by Amazon x.x  "GENERAL OPTIONS".  For size edit &quot;Checkout Button Size&quot; and for color edit &quot;Button Style&quot;<br />
+  <br />
+  </li>
+  <li> <strong>I would like to display the CBA  button above the other options. How can I achieve this?</strong><br /> 
+  Go to  Administration-&gt;Modules-&gt;Payment-&gt;Checkout by Amazon x.x  and set the&nbsp; &quot;<strong>Sort order  of display</strong>&quot; to 0.<br />
+  <br />
+  </li>
+  <li> <strong>Can I use a custom image instead of  showing the CBA button?</strong><br />
+  No. We recommend you to retain the image specified by Amazon Payments.<br />
+  <br />
+  </li>
+  <li><strong>The cart does not get cleared when  the buyer is redirected to my website from CBA pipeline. How do I do  this?</strong><br />
+   Please ensure that $cart-&gt;reset()  is present in the success return url file. The success return url will be set  in&nbsp;  Administration-&gt;Modules-&gt;Payment-&gt;Checkout by Amazon x.x  &quot;<strong>Success Return Page</strong>&quot;. If nothing is set then the default  success return page is index.php</li>
+</ol>
+   
+<h2 id="OrderNoIOPN">Order Management related queries  (without IOPN)</h2>
+
+<ol>   
+<li><strong>I am not seeing Checkout By Amazon  orders on the administration -&gt; orders page. Why?</strong><br />
+  <br />
+	<ol type="a" start="a">
+    	<li><em><strong>Did you ensure that you provided the  right values for Merchant Token, User email, Password etc?</strong></em><br />
+    Verify the right values are set by navigating  to Administration-&gt;Modules-&gt;Payment-&gt;Checkout by Amazon x.x . You can verify in <a href="https://sellercentral.amazon.com/gp/seller/configuration/account-info-page.html/ref=cb_acctinfo_snav_acctinfo" target="blank">Seller Central-Account Info</a><br />
+   	  <br />
+   	  </li>
+        <li><em><strong>I verified that I provided the right  credentials. I am still not able to get orders!</strong></em><br />
+      Please check if your cron job is configured properly. The sample cron job below will run the  command every hour every day of the week. Please change the frequency as  required<br> 
+      <pre>0 * * * * wget  &ldquo;http://yourwebsite.com/catalog/checkout_by_amazon.php?action=Everything&rdquo; -O /dev/null</pre>
+      <br />
+      </li>
+        <li><em><strong>I verified my credentials and cron  job. What more?</strong></em><br />
+          Enable XML reports in the CBA pipeline settings in Seller Central. Go to  <a href = "https://sellercentral.amazon.com/gp/cba/seller/account/settings/user-settings-view.html/ref=cb_cbapipeset_snav_acctinfo" target="blank">Seller Central - Checkout Pipeline Settings </a> and enter the <b>Order Reports Settings:</b><br>
+      The Order Report Type: should be xml and Order Report Schedule: can be the  schedule you want<br />
+      <br />
+      </li>
+        <li> <em><strong>I have ensured that I implemented  suggestions above. I still don&rsquo;t see orders! What do I do?</strong></em><br />
+          Please note that orders once placed can take up to 30 minutes before they can  appear in the orders page. If you still do not receive the order, <br />
+      please contact us <a href="https://sellercentral.amazon.com/gp/contact-us/contact-amazon-form.html/ref=cb_contactus_foot_home?ie=UTF8&amp;urlStr=/gp/homepage.html" target="_blank">here</a>.
+      <br />
+      <br />
+      </li>
+    </ol>
+  </li>
+    <li> <strong>After the order is placed, why  does it take time for the order to appear on the Administration -&gt; Customers -&gt; Orders  page?</strong><br />
+          As soon as an order is placed, we review the order before charging the customer. The order will appear in Administration -&gt; Customers -&gt; Orders  page as soon as it is reviewed and is ready to be shipped. However if you enable Instant Order Notification (IOPN), the order will appear in Administration -&gt; Customers -&gt; Orders as soon as it is placed.<br />
+      <br />
+  </li>
+  <li> <strong>Is it mandatory to use the Amazon  provided buttons &ndash; &ldquo;Confirm Shipment&rdquo;, &ldquo;Cancel&rdquo; and &ldquo;Refund&rdquo;?</strong><br />
+    Yes. Please use these buttons so that we can change the order status and execute debit/credit the customer's payment method as required.<br /><br /></li>
+  <li><strong> I do not have the shipping carrier  name and shipment Id while delivering. What do I do?</strong><br />
+      It is recommended that you provide these details so that we log these along with the order and use this information later (if required). Please provide  &quot;None&quot;, if you are not able to specify this information at the time of delivery. <br /><br /></li>
+  <li><strong> The operation (&ldquo;Confirm  Shipment&rdquo;/&ldquo;Cancel&rdquo;/&ldquo;Refund&rdquo;) I performed on an order, resulted in an error. How  do I rectify this?</strong><br />
+      Please check the status of the order  in <a href="https://sellercentral.amazon.com/gp/orders-v2/list/ref=cb_myo_dnav_cbapipeset?ie=UTF8&useSavedSearch=default" target="blank">Seller central -&gt; Orders -&gt; Manage Orders page</a>. Ensure all the order  Management settings are correct in  Administration-&gt;Modules-&gt;Payment-&gt;Checkout  By Amazon x.x &quot;ORDER MANAGEMENT OPTIONS&quot;. Also please ensure that you do not manage orders from Seller Central.<br /><br /></li>
+  <li> <strong>By when should I ship the  order?</strong><br />
+      Please deliver the orders within  30 days. Else the order will be cancelled automatically.<br /><br /></li>
+  <li><strong> I would like to do a partial refund  on an order. How do I achieve this?</strong><br />
+      We do not support partial refunds as  of now.<br /><br /></li>
+  <li> <strong>How do I represent chargeback and  disputes? (give the link to contact us)</strong><br />
+      Please refer to the <a href="https://sellercentral.amazon.com/gp/help/help-page.html/ref=cb_48781_cont_scsearch?ie=UTF8&itemID=48781" target="blank">Chargeback FAQ.</a><br />
+  </li>
+</ol>
+
+<h2 id="OrderWithIOPN">Order Management related queries  (using IOPN)</h2>
+
+<ol>
+  <li><strong>What is my IOPN end point?</strong><br />
+  Your IOPN End point is <strong>https://www.yourdomain.com/checkout_by_amazon.php</strong><br /> <strong>IMPORTANT:</strong> To enable IOPN, you should have a https enabled IOPN endpoint. <br />
+    <br />
+  </li>
+  <li><strong>I am not receiving Instant order  notifications. Why?</strong><br />
+  Please ensure that you provided the  right IOPN endpoint on seller central. The endpoint has to be provided  here at <a href = "https://sellercentral.amazon.com/gp/cba/seller/account/settings/user-settings-view.html/ref=cb_cbapipeset_dnav_home " target="blank">Seller Central - Checkout Pipeline Settings</a><br />
+    <br />
+  </li>
+  <li><strong>I provided the right URL, I am still  not able to get the Instant notifications. What do I do?</strong><br />
+    Please ensure that the URL provided by you is externally resolvable (outside your firewall if any). Also verify the URL you provided using a browser by ensuring there is no error/warning. If you need more help, please contact us <a href="https://sellercentral.amazon.com/gp/contact-us/contact-amazon-form.html/ref=cb_contactus_foot_home?ie=UTF8&amp;urlStr=/gp/homepage.html" target="_blank">here</a>.<br />
+  <br /></li>
+  <li> <strong>My IOPN Endpoint was down. When will  I receive the IOPNs?</strong><br />
+	We retry the IOPNs with an exponential back-off algorithm (for a maximum of 14 days). You should be receiving the IOPNs in the next retry.<br />
+  <br /></li>
+  <li> <strong>Can I ship the good as soon as I  receive the IOPN? </strong><br />
+    No. Please wait for the order to  move to &quot;Unshipped status&quot;. This will be indicated by the comments  &quot;Checkout by Amazon Order ready to be delivered&quot;<br /><br /></li>
+  <li><strong>I received a cancel notification  after the&quot;order review&quot; IOPN. Why?</strong><br />
+    Amazon reviews the orders as soon as they are placed. If we find an order to be suspicious, it is automatically cancelled.<br />
+  </li>
+</ol>
+ 
+<h2 id="NoCallback">Static Shipping and Tax related  queries (without Callback)</h2>
+
+<ol>
+  <li><strong>How do I configure my shipping  settings?</strong><br />
+    You can configure the shipping  settings in <a href="https://sellercentral.amazon.com/gp/shipping/dispatch.html/ref=cb_shipset_snav_cbapipeset" target="blank">Seller Central -&gt; Settings -&gt; Shipping Settings</a> <br />
+  <br />
+  </li>
+  <li> <strong>How do I configure my tax  settings?</strong><br />
+     You can configure the tax settings  in <a href="https://sellercentral.amazon.com/gp/flexible-tax-service/view-tax-settings.html/ref=cb_mngtax_snav_shipset" target="blank">Seller Central -&gt; Settings -&gt; Manage Taxes</a> section.  <br /><br /></li>
+  <li><strong>How long does it take for my  settings to propagate?</strong><br />
+     It takes around 4 hours for the  settings to propogate<br /><br /></li>
+  <li> <strong>I would like to get some custom data  (Customer/Product related information) in IOPN. How do I do this?</strong><br />
+  Please refer the <a href="InsertingCustomData.html" target="_blank">Inserting Custom Data Guide </a>  for details on using CustomData<br />
+  </li>
+</ol>
+
+<h2 id="UsingCallback">Dynamic Shipping and Tax related  queries (using callback)</h2>
+
+<ol>
+  <li><strong>My orders are failing with callback  error. What could be wrong?</strong><br />
+    Please check the settings in  &quot;CALLBACK OPTIONS&quot; from Administration-&gt;Modules-&gt;Payment-&gt;Checkout  By Amazon x.x<br />
+  <br />
+  </li>
+<li> <strong>How are shipping rates calculated  dynamically?</strong><br />
+  The shipping address is sent back to  the merchant's endpoint. The CBA plug-in for ZenCart dynamically calculates  the shipping rates and the tax rates<br />
+</li>
+     <li><strong>How are tax rates calculated  dynamically?</strong><br />
+  The shipping address is sent back to  the merchant's endpoint. The CBA plug-in for ZenCart dynamically calculates  the shipping rates and the tax rates<br /><br /></li>
+<li> <strong>Can I disable quotes form a  particular shipping carrier?</strong><br />
+ The quotes will be automatically  disabled if the shipping carrier is uninstalled from Administration -&gt;  Modules -&gt; Shipping module. <br />
+ <br />
+</li>
+<li> <strong>Do I need to configure the Shipping settings  for sending quotes from different shipping carriers?</strong><br />
+Since we will be getting the quotes directly from the different shipping modules, there are no specific settings to send these quotes. All the settings that apply in the different shipping modules will be used by default.</li>
+</ol>
+
+<h2 id="Promotions">Promotions related queries</h2>
+
+<ol>
+  <li> <strong>How do I configure promotions?</strong><br />
+  Please use <a href="https://sellercentral.amazon.com/gp/promo-manager/home.html/ref=cb_promomgr_dnav_home" target="blank">Seller Central Settings  -&gt;&nbsp; Manage Promotions</a>. it takes around  4 hours for the settings to propogate.<br />
+  <br />
+  </li>
+    <li> <strong>Can I set dynamic promotion rates at  the time of order placement?</strong><br />
+    No. We do not support providing dynamic promotion rates at this point. Please configure promotion codes on Seller Central.<br />
+    <br />
+  </li>
+  <li> <strong>Will a customer be able to apply  multiple promotion codes for a single order? </strong><br />
+    Yes. Please read the seller central  help page for more details on <a href="https://sellercentral.amazon.com/gp/help/60951#" target="blank">Promotions</a> <br />
+    <br />
+  </li>
+    <li> <strong>What are the different types of  promotions?</strong><br />
+Please read the seller central  help page for more details on <a href="https://sellercentral.amazon.com/gp/help/60951#" target="blank">Promotions</a><br />
+    </li>
+</ol>
+     
+<h2 id="Logging">Logging and Debugging</h2>
+<ol>
+  <li><strong>Where do I find CBA specific  logs?</strong><br />
+  You can find the log in the catalog  directory <b>checkout_by_amazon/log/checkout_by_amazon.log</b> file<br />
+  <br />
+  </li>
+    <li><strong> I am not able to find the log file  in the location specified above. What do I do?</strong><br />
+     Please check the following<br />
+     <ol type="a">
+     <li>Have you enabled Diagnostic  Logging? You can verify that at Administration->Modules->Payment->Checkout by Amazon x.x "Enable Diagnostic Logging"</li>
+     <li>Did you ensure that the location  specified has &lsquo;write&rsquo; permissions?</li>
+     </ol>
+Please create the file  checkout_by_amazon_callback.log&nbsp; in the  catalog directory if none of this works<br />
+  <br />
+  </li>
+    <li><strong>How to enable logging?</strong><br />
+    Go to  Administration-&gt;Modules-&gt;Payment-&gt;Checkout by Amazon x.x  and set &quot;Enable Diagnostic Logging&quot; to True<br />
+    <br />
+    </li>
+    <li> <strong>What are the different events that  are logged?</strong><br />
+    The Callback, Instant order payment  notification and post order management details are logged<br />
+    <br />
+    </li>
+    <li> <strong>What are the tips to search the log  file?</strong><br />
+     Use the following parmaeters to  search the log file<br />
+     <ol type="i">
+       <li>Amazon Order ID (Comments of  orders_status_history table)</li>
+       <li>NotificationReferenceID (From  amazon_iopn table)</li>
+       <li>TransactionID (Comments of  orders_status_history table)</li>
+     </ol>
+  <br />
+  </li>
+    <li><strong>My query is not addressed by this guide. How do I  contact the CBA team and what information should I provide?</strong><br />
+     Please contact us at <a href="https://sellercentral.amazon.com/gp/contact-us/contact-amazon-form.html/ref=cb_contactus_foot_home?ie=UTF8&amp;urlStr=/gp/homepage.html" target="_blank">here</a>. Please detail the problem and provide details like Order Id, Cart Id, Notification Reference Id etc. which will help us debug.<br />
+    </li>
+  </li>
+  </li>
+</ol>
+</body>
+</html>
